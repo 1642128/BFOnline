@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BFOnline</title>
+<style>
+  textarea {
+    width: 100%;
+    height: 200px;
+    font-family: monospace;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+</style>
+</head>
+<body>
+
+  <h1>BFOnline</h1>
+
+  <form>
+    <label for="codeEditor">Enter your BF code here:</label><br>
+    <textarea id="codeEditor" name="codeContent" rows="10" cols="50">
+      // Your default code or placeholder text can go here
+      function helloWorld() {
+        console.log("Hello, World!");
+      }
+      helloWorld();
+    </textarea><br>
+    <input type="submit" value="Submit Code">
+  </form>
+
+</body>
+</html>
