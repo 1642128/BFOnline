@@ -77,7 +77,8 @@
         break;
     }
   }
-  return output;
+  var outputbox = document.getElementById("outputbox");
+  outputbox.value += output
 }
 </script>
 </head>
@@ -91,5 +92,6 @@
     <input type="submit" value="Run Code" onclick="brainfuck()">
   </form>
   <input type="text" id="input" placeholder="Enter your input">
+  <input type="text" id="output" placeholder="">
 </body>
 </html>
