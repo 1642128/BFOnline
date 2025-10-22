@@ -13,6 +13,73 @@
     resize: vertical;
   }
 </style>
+  <script>
+  function brainfuck() {
+  var code = document.getElementById("myTextBox");
+  code = code.value
+  var input = document.getElementById("input");
+  input = code.value
+  // The memory tape is a large array of zeros
+  const memory = new Array(30000).fill(0);
+  let pointer = 0; // The data pointer
+  let output = '';
+  let inputIndex = 0;
+
+  // Pre-process loops to find matching brackets
+  const loopMap = {};
+  const loopStack = [];
+  for (let i = 0; i < code.length; i++) {
+    if (code[i] === '[') {
+      loopStack.push(i);
+    } else if (code[i] === ']') {
+      const openBracketPos = loopStack.pop();
+      loopMap[openBracketPos] = i;
+      loopMap[i] = openBracketPos;
+    }
+  }
+
+  // Main interpreter loop
+  for (let i = 0; i < code.length; i++) {
+    const command = code[i];
+
+    switch (command) {
+      case '>':
+        pointer++;
+        break;
+      case '<':
+        pointer--;
+        break;
+      case '+':
+        memory[pointer]++;
+        break;
+      case '-':
+        memory[pointer]--;
+        break;
+      case '.':
+        output += String.fromCharCode(memory[pointer]);
+        break;
+      case ',':
+        if (inputIndex < input.length) {
+          memory[pointer] = input.charCodeAt(inputIndex++);
+        } else {
+          memory[pointer] = 0;
+        }
+        break;
+      case '[':
+        if (memory[pointer] === 0) {
+          i = loopMap[i];
+        }
+        break;
+      case ']':
+        if (memory[pointer] !== 0) {
+          i = loopMap[i];
+        }
+        break;
+    }
+  }
+  return output;
+}
+</script>
 </head>
 <body>
 
@@ -20,15 +87,9 @@
 
   <form>
     <label for="codeEditor">Enter your BF code here:</label><br>
-    <textarea id="codeEditor" name="codeContent" rows="10" cols="50">
-      // Your default code or placeholder text can go here
-      function helloWorld() {
-        console.log("Hello, World!");
-      }
-      helloWorld();
-    </textarea><br>
-    <input type="submit" value="Submit Code">
+    <textarea id="codeEditor" name="codeContent" rows="10" cols="50">++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.</textarea><br>
+    <input type="submit" value="Run Code" onclick="Compile()">
   </form>
-
+  <input type="text" id="input" placeholder="Enter your input">
 </body>
 </html>
