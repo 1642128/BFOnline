@@ -78,7 +78,7 @@
     }
   }
   var outputbox = document.getElementById("outputbox");
-  outputbox.value += output
+  outputbox.value = output
 }
 </script>
 </head>
@@ -91,7 +91,7 @@
     <textarea id="codeEditor" name="codeContent" rows="10" cols="50">++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.</textarea><br>
     <input type="submit" value="Run Code" onclick="brainfuck()">
   </form>
-  <input type="text" id="input" placeholder="Enter your input">
-  <input type="text" id="output" placeholder="">
+  <input type="text" id="input">
+  <input type="text" id="output">
 </body>
 </html>
